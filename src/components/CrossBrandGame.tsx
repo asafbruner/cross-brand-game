@@ -60,24 +60,23 @@ const CrossBrandGame: React.FC = () => {
         </p>
         <div className="h-64 w-full">
           <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={scenario1Choice === 'optimize' ? optimizedData : initialData}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                animate
-              >
-                {initialData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={index === 0 ? COLORS.pink : COLORS.purple} 
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+          <PieChart>
+            <Pie
+              data={scenario1Choice === 'optimize' ? optimizedData : initialData}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {initialData.map((_, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={index === 0 ? COLORS.pink : COLORS.purple} 
+                />
+              ))}
+            </Pie>
+          </PieChart>
           </ResponsiveContainer>
         </div>
       </div>
