@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { ChevronRight, Search, DollarSign, TrendingUp } from 'lucide-react';
 
-const CrossBrandGame = () => {
-  const [currentScreen, setCurrentScreen] = useState('intro');
-  const [scenario1Choice, setScenario1Choice] = useState(null);
-  const [scenario2Complete, setScenario2Complete] = useState(false);
+type Screen = 'intro' | 'scenario1' | 'scenario2' | 'results';
+type Scenario1Choice = 'optimize' | 'nothing' | null;
+
+interface DataItem {
+  name: string;
+  value: number;
+}
+
+const CrossBrandGame: React.FC = () => {
+  const [currentScreen, setCurrentScreen] = useState<Screen>('intro');
+  const [scenario1Choice, setScenario1Choice] = useState<Scenario1Choice>(null);
+  const [scenario2Complete, setScenario2Complete] = useState<boolean>(false);
   
   const COLORS = {
     purple: '#6B46C1',
@@ -15,18 +23,17 @@ const CrossBrandGame = () => {
     green: '#48BB78'
   };
 
-  // Data for the pie charts
-  const initialData = [
+  const initialData: DataItem[] = [
     { name: 'Wasted Spend', value: 40 },
     { name: 'Efficient Spend', value: 60 }
   ];
 
-  const optimizedData = [
+  const optimizedData: DataItem[] = [
     { name: 'Wasted Spend', value: 10 },
     { name: 'Efficient Spend', value: 90 }
   ];
 
-  const IntroScreen = () => (
+  const IntroScreen: React.FC = () => (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-purple-600 to-pink-500 text-white p-8">
       <div className="text-4xl font-bold mb-8">Cross-Brand</div>
       <h1 className="text-2xl md:text-3xl text-center mb-8">
@@ -42,7 +49,7 @@ const CrossBrandGame = () => {
     </div>
   );
 
-  const Scenario1 = () => (
+  const Scenario1: React.FC = () => (
     <div className="min-h-screen bg-white p-8">
       <h2 className="text-2xl font-bold mb-6 text-purple-600">
         Scenario 1: Brand Cannibalization Issue
@@ -126,7 +133,7 @@ const CrossBrandGame = () => {
     </div>
   );
 
-  const Scenario2 = () => (
+  const Scenario2: React.FC = () => (
     <div className="min-h-screen bg-white p-8">
       <h2 className="text-2xl font-bold mb-6 text-purple-600">
         Scenario 2: Competitors Bidding on Your Brand
@@ -166,7 +173,7 @@ const CrossBrandGame = () => {
     </div>
   );
 
-  const ResultsScreen = () => (
+  const ResultsScreen: React.FC = () => (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 text-white p-8">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-8 text-center">
@@ -205,7 +212,7 @@ const CrossBrandGame = () => {
     </div>
   );
 
-  const screenComponents = {
+  const screenComponents: Record<Screen, React.FC> = {
     intro: IntroScreen,
     scenario1: Scenario1,
     scenario2: Scenario2,

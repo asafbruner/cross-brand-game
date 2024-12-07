@@ -1,9 +1,7 @@
-import CrossBrandGame from './components/CrossBrandGame'
+import CrossBrandGame from './components/CrossBrandGame';
 
 function App() {
-  return (
-    <CrossBrandGame />
-  )
+  return <CrossBrandGame />;
 }
 
-export default App
+export default App;
